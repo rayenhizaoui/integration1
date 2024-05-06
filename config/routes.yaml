@@ -1,3 +1,21 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+addUser:
+    path: /addUser
+    controller: App\Controller\UserController::addUser
+    methods: ['GET', 'POST']
+
+app_user_add:
+    path: /user/add
+    controller: App\Controller\UserController::addUser
+    methods: ['GET','POST']
+
+show_page:
+    path: /show
+    controller: App\Controller\SecurityController::showPage
+
+# config/routes.yaml
+app_login_check:
+    path: /login_check
+    methods: [POST]
