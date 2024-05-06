@@ -1,0 +1,42 @@
+{# templates/equipement/_form.html.twig #}
+{{ form_start(form, {'attr': {'class': 'pt-3', 'novalidate': 'novalidate'}}) }}
+
+<div class="form-group">
+    {{ form_label(form.nom) }}
+    {{ form_widget(form.nom, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.nom.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.nom.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.nombre) }}
+    {{ form_widget(form.nombre, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.nombre.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.nombre.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.image) }}
+    {{ form_widget(form.image, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.image.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.image.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<button type="submit" class="btn btn-custom">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

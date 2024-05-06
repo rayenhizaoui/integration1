@@ -9,12 +9,6 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
-/**
- * @method User|null find($id, $lockMode = null, $lockVersion = null)
- * @method User|null findOneBy(array $criteria, array $orderBy = null)
- * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
@@ -22,9 +16,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    /**
-     * Used to upgrade (rehash) the user's password automatically over time.
-     */
+    public function isBanned(User $user): bool
+    {
+        return $user->isBanned();
+    }
+
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof User) {
@@ -36,32 +32,30 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
     /*
-    public function findByExampleField($value)
+    public function findBySearchTerm($searchTerm)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $queryBuilder = $this->createQueryBuilder('u');
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+        // Ajoutez les conditions de recherche
+        $queryBuilder->where(
+            $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->like('u.id', ':searchTerm'),
+                $queryBuilder->expr()->like('u.cin', ':searchTerm'),
+                $queryBuilder->expr()->like('u.username', ':searchTerm'),
+                $queryBuilder->expr()->like('u.numero', ':searchTerm'),
+                $queryBuilder->expr()->like('u.email', ':searchTerm'),
+                $queryBuilder->expr()->like('u.adresse', ':searchTerm'),
+                $queryBuilder->expr()->like('u.password', ':searchTerm'),
+                $queryBuilder->expr()->like('u.role', ':searchTerm')
+            )
+        );
+
+        // Associez les paramètres
+        $queryBuilder->setParameter('searchTerm', '%' . $searchTerm . '%');
+
+        // Exécutez la requête et récupérez les résultats
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
+    }*/
 }

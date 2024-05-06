@@ -1,0 +1,45 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Recherche d'équipement{% endblock %}
+
+{% block content %}
+    <h1>Recherche d'équipement</h1>
+
+    <form id="searchForm">
+        <label for="searchTerm">Nom de l'équipement :</label>
+        <input type="text" id="searchTerm" name="q">
+        <button type="submit">Rechercher</button>
+    </form>
+
+    <div id="equipementDetails"></div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêcher le formulaire de se soumettre normalement
+
+            var searchTerm = document.getElementById('searchTerm').value;
+
+            // Envoyer une requête AJAX au serveur pour récupérer les détails de l'équipement
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var equipementDetails = JSON.parse(xhr.responseText);
+                        // Mettre à jour l'interface utilisateur avec les détails de l'équipement
+                        document.getElementById('equipementDetails').innerHTML = `
+                            <h2>${equipementDetails.nom}</h2>
+                            <p>Nombre: ${equipementDetails.nombre}</p>
+                            <p>Image: <img src="${equipementDetails.image}" alt="${equipementDetails.nom}"></p>
+                            <p>Rating: ${equipementDetails.rating}</p>
+                            <p>QR Code: ${equipementDetails.qrcode}</p>
+                        `;
+                    } else {
+                        console.error('Une erreur s\'est produite lors de la requête AJAX');
+                    }
+                }
+            };
+            xhr.open('GET', "{{ path('app_equipement_details') }}?q=" + encodeURIComponent(searchTerm));
+            xhr.send();
+        });
+    </script>
+{% endblock %}

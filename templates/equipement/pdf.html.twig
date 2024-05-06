@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des équipements</title>
+    <!-- Inclure les styles CSS nécessaires pour le PDF -->
+    <style>
+        .qr-code {
+            width: 50px; /* Ajuster la taille du QR code selon vos besoins */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des équipements</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Nombre</th>
+                <th>QR Code</th>
+                <th>Rating</th>
+                <!-- Ajouter d'autres en-têtes de colonnes si nécessaire -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipement in equipements %}
+                <tr>
+                    <td>{{ equipement.nom }}</td>
+                    <td>{{ equipement.nombre }}</td>
+                    
+                    <td>
+                        {% if equipement.qrcode %}
+                            <img src="data:image/png;base64,{{ equipement.qrcode }}" alt="QR Code" class="qr-code">
+                        {% else %}
+                            Aucun QR Code
+                        {% endif %}
+                    </td>
+                    <td>{{ equipement.rating }}</td>
+                    <!-- Ajouter d'autres données de colonnes si nécessaire -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

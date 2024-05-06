@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Confirmation de création de compte</title>
+	</head>
+	<body>
+		<h1>Bienvenue,
+			{{ user.username }}
+			!</h1>
+		<p>Votre compte a été créé avec succès. Vous pouvez désormais vous connecter.</p>
+
+		<p>Informations sur votre compte :</p>
+		<ul>
+			<li>
+				<strong>Nom d'utilisateur :</strong>
+				{{ user.username }}</li>
+			<li>
+				<strong>Adresse e-mail :</strong>
+				{{ user.email }}</li>
+			<!-- Ajoutez d'autres informations sur l'utilisateur ici si nécessaire -->
+		</ul>
+
+		<p>Merci de rejoindre notre plateforme.</p>
+
+		<p>Cordialement,<br>Votre équipe</p>
+	</body>
+</html>

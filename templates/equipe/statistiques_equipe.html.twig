@@ -1,0 +1,52 @@
+{% extends 'basePageBack.html.twig' %}
+
+{% block title %}Statistiques de l'équipe{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Statistiques de l'équipe</h1>
+        <canvas id="teamStatisticsChart" width="400" height="400"></canvas>
+         <a href="{{ path('app_equipe_index') }}">Retour</a>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx = document.getElementById('teamStatisticsChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Équipes suffisamment fournies', 'Équipes insuffisamment fournies'],
+                    datasets: [{
+                        label: 'Statistiques des équipes',
+                        data: [ {{ statistics.teams_with_insufficient_players|length }},{{ statistics.teams_with_enough_players|length }}],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 99, 132, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Répartition des équipes'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

@@ -1,0 +1,31 @@
+{% extends 'basePageBack.html.twig' %}
+
+{% block title %}Détails du jeu{% endblock %}
+
+{% block content %}
+    <h1>Détails du jeu</h1>
+
+    <table>
+        <tr>
+            <th>Nom</th>
+            <td>{{ jeu.nom }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ jeu.type }}</td>
+        </tr>
+        <tr>
+            <th>Score</th>
+            <td>{{ jeu.score }}</td>
+        </tr>
+        <tr>
+            <th>Résultat</th>
+            <td>{{ jeu.resultat }}</td>
+        </tr>
+    </table>
+
+    <a href="{{ path('app_jeu_index') }}">Retour à la liste des jeux</a>
+     <a href="{{ path('app_jeu_edit', {'id': jeu.id}) }}">Modifier</a>
+
+    {{ include('jeu/_delete_form.html.twig') }}
+{% endblock %}

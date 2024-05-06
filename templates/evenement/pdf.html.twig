@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Evenement</title>
+    <style>
+        /* Votre CSS pour le PDF */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Evenement Details</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <td>{{ evenement.id }}</td>
+        </tr>
+        <tr>
+            <th>Event Name</th>
+            <td>{{ evenement.nomevent }}</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>{{ evenement.lieu }}</td>
+        </tr>
+        <tr>
+            <th>Event Date</th>
+            <td>{{ evenement.dateevent ? evenement.dateevent|date('Y-m-d') : 'Not set' }}</td>
+        </tr>
+        <tr>
+            <th>Duration</th>
+            <td>{{ evenement.duree }}</td>
+        </tr>
+        <tr>
+            <th>QR Code</th>
+            <td>
+                <img src="data:image/png;base64,{{ evenement.qrcode }}" alt="QR Code" style="max-width: 100px; height: auto;">
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

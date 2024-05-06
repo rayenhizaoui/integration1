@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+		<title>
+			{% block title %}Lugx Gaming - Shop Page
+			{% endblock %}
+		</title>
+
+		<!-- Bootstrap core CSS -->
+		<link
+		href="{{ asset('front/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+
+		<!-- Additional CSS Files -->
+		{% block css %}
+			<link rel="stylesheet" href="{{ asset('front/assets/css/fontawesome.css') }}">
+			<link rel="stylesheet" href="{{ asset('front/assets/css/templatemo-lugx-gaming.css') }}">
+			<link rel="stylesheet" href="{{ asset('front/assets/css/owl.css') }}">
+			<link rel="stylesheet" href="{{ asset('front/assets/css/animate.css') }}">
+			<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+			<style>
+				.thumb img {
+					width: 100%;
+					height: auto;
+				}
+			</style>
+		{% endblock %}
+		<!--
+										
+										TemplateMo 589 lugx gaming
+										
+										https://templatemo.com/tm-589-lugx-gaming
+										
+										-->
+
+	</head>
+
+	<body>
+
+		<!-- ***** Preloader Start ***** -->
+		<div id="js-preloader" class="js-preloader">
+			<div class="preloader-inner">
+				<span class="dot"></span>
+				<div class="dots">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+		<!-- ***** Preloader End ***** -->
+
+		<!-- ***** Header Area Start ***** -->
+		{% block header %}
+			<header class="header-area header-sticky">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<nav
+								class="main-nav">
+								<!-- ***** Logo Start ***** -->
+								<a href="{{ path('app_home') }}" class="logo">
+									<img src="{{ asset('front/assets/images/logoo.png') }}" alt="" style="width: 60px;">
+								</a>
+								<!-- ***** Logo End ***** -->
+								<!-- ***** Menu Start ***** -->
+								<ul class="nav">
+									<li>
+										<a href="{{ path('app_home') }}" class="active">Home</a>
+									</li>
+									<li>
+										<a href="shop.html">Equipements</a>
+									</li>
+									<li>
+										<a href="{{ path('index_Front') }}">Tournoi</a>
+									</li>
+									<li>
+										<a href="{{ path('app_evenement_indexFront') }}">Evenements</a>
+									</li>
+									<li>
+										<a href="{{ path('app_equipe_index_front') }}">Equipes</a>
+									</li>
+									<li>
+										<a href="{{ path('app_billet_add') }}">Billets</a>
+									</li>
+									<li>
+										<a href="{{ path('app_user_add') }}">Inscription</a>
+									</li>
+									<li>
+										<a href="{{ path('app_login') }}">Se connecter</a>
+									</li>
+									<li>
+										<a href="{{ path('app_dashboard') }}">Back</a>
+									</li>
+								</ul>
+								<a class='menu-trigger'>
+									<span>Menu</span>
+								</a>
+								<!-- ***** Menu End ***** -->
+							</nav>
+						</div>
+					</div>
+				</div>
+			</header>
+		{% endblock %}
+		<!-- ***** Header Area End ***** -->
+
+		{% block content %}
+			<div class="page-heading header-text">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<h3>Afficher Equipe</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row trending-box">
+					{% for equipe in equipes %}
+						<div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">
+							<div class="item">
+								<div class="thumb">
+									<a><img src="{{ asset('front/assets/images/equipe' ~ loop.index ~ '.png')}}" alt="" class="team-image"></a>
+								</div>
+								<div class="down-content">
+									<h4>{{ equipe.nom }}</h4>
+									<p>Nbr Joueur:
+										{{ equipe.nbrJoueur }}</p>
+									<p>Liste Joueur:
+										{{ equipe.listeJoueur }}</p>
+									<p>ID Jeu:
+										{{ equipe.jeu.id }}</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<div class="text-center mt-3">
+					<a href="{{ path('app_equipe_new_front') }}" class="btn btn-secondary">Ajouter</a>
+					<a href="{{ path('app_jeu_index_front') }}" class="btn btn-secondary">Jeu</a>
+					<a id="chatbotButton" href="{{ path('app_chatbot') }}" class="btn btn-secondary">Chatbot</a>
+				</div>
+			</div>
+		{% endblock %}
+
+		<footer>
+			<div class="container">
+				<div class="col-lg-12">
+					<p>Copyright © 2048 L'ESPORT Company. All rights reserved. &nbsp;&nbsp;
+						<a rel="nofollow" href="https://templatemo.com" target="_blank"></a>
+					</p>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Scripts -->
+		<!-- Bootstrap core JavaScript -->
+		{% block js %}
+			<script src="{{ asset('front/vendor/jquery/jquery.min.js') }}"></script>
+			<script src="{{ asset('front/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+			<script src="{{ asset('front/assets/js/isotope.min.js') }}"></script>
+			<script src="{{ asset('front/assets/js/owl-carousel.js') }}"></script>
+			<script src="{{ asset('front/assets/js/counter.js') }}"></script>
+			<script src="{{ asset('front/assets/js/custom.js') }}"></script>
+			<!-- SweetAlert -->
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+			<script>
+				document.getElementById("chatbotButton").addEventListener("click", function (event) {
+event.preventDefault(); // Empêcher le comportement par défaut du lien
+
+const swalWithBootstrapButtons = Swal.mixin({
+customClass: {
+confirmButton: "btn btn-success",
+cancelButton: "btn btn-danger"
+},
+buttonsStyling: false,
+animation: false, // Désactiver l'animation par défaut
+showClass: {
+popup: 'swal2-show' // Spécifier une classe CSS pour l'animation personnalisée
+},
+hideClass: {
+popup: 'swal2-hide' // Spécifier une classe CSS pour l'animation personnalisée
+}
+});
+
+swalWithBootstrapButtons.fire({
+title: "Etes-vous sûr de rester respectueux?",
+text: "Bienvenue dans l'Esport!",
+icon: "warning",
+showCancelButton: true,
+confirmButtonText: "Oui, continuer!",
+cancelButtonText: "Non, annuler!",
+reverseButtons: true
+}).then((result) => {
+if (result.isConfirmed) {
+
+window.location.href = "{{ path('app_chatbot') }}";
+
+} else if (result.dismiss === Swal.DismissReason.cancel) {
+swalWithBootstrapButtons.fire({title: "Quitter", text: "désolé mais notre site web est très sécurisé.", icon: "error"});
+}
+});
+});
+			</script>
+
+		{% endblock %}
+
+	</body>
+
+</html>

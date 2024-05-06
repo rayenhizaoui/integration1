@@ -1,0 +1,60 @@
+<div class="filter_result_wrap">
+	<h3>Filter Result</h3>
+	<div class="filter_bordered">
+		<div class="filter_inner">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="single_select">
+						{{ form_start(form) }}
+						<h6>Nom tournoi
+						</h6>
+
+						{{ form_row(form.q) }}
+						<div class="row">
+							<div class="col">
+								<h6>Frais Participation
+								</h6>
+							</div>
+						</div>
+
+
+						<div id="price-slider"></div>
+
+						<div class="row">
+							<div class="col">
+								{{ form_row(form.min) }}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								{{ form_row(form.max) }}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<h6>Type De Jeu
+								</h6>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								{{ form_row(form.typeJeu ,{ 'attr': {'class': 'form-control'} }) }}
+							</div>
+						</div>
+
+
+						<button class="boxed-btn4" type="submit">Search</button>
+						{{ form_end(form) }}
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<div class="reset_btn"></div>
+	</div>
+
+</div>

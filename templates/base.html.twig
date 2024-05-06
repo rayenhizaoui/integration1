@@ -50,25 +50,25 @@ preloader.style.display = 'none';
 								class="main-nav">
 								<!-- ***** Logo Start ***** -->
 								<a href="index.html" class="logo">
-									<img src="assets/images/logoo.png" alt="" style="width: 60px;">
+									<img src="{{asset('/images/logoo.png')}}" alt="" style="width: 60px;">
 								</a>
 								<!-- ***** Logo End ***** -->
 								<!-- ***** Menu Start ***** -->
 								<ul class="nav">
 									<li>
-										<a href="index.html" class="active">Home</a>
+										<a href="{{ path('app_home') }}" class="active">Home</a>
 									</li>
 									<li>
-										<a href="shop.html">Equipements</a>
+										<a href="{{ path('app_equipement_indexFront') }}">Equipements</a>
 									</li>
 									<li>
-										<a href="product-details.html">Paiement tournoi</a>
+										<a href="{{ path('index_Front') }}">Tournoi</a>
 									</li>
 									<li>
-										<a href="contact.html">Evenements</a>
+										<a href="{{ path('app_evenement_indexFront') }}">Evenements</a>
 									</li>
 									<li>
-										<a href="contact.html">Equipes</a>
+										<a href="{{ path('app_equipe_index_front') }}">Equipes</a>
 									</li>
 									<li>
 										<a href="{{ path('app_billet_add') }}">Billets</a>

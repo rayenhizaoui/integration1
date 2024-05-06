@@ -1,0 +1,174 @@
+<html>
+<head>
+    <title>Add Map</title>
+   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+   <!-- <script type="module" src="{{ asset('maps/maps.js') }}"></script>-->
+
+</head>
+<body>
+{% block body %}
+<!-- [START maps_add_map_heading] -->
+
+    <h1>Location</h1>
+<!-- [END maps_add_map_heading] -->
+<!-- [START maps_add_map_div] -->
+<!--The div element for the map -->
+<div id="map"></div>  
+<style>
+    /**
+ * @license
+ * Copyright 2019 Google LLC. All Rights Reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+    /* Set the size of the div element that contains the map */
+    #map {
+        height: 400px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+    }
+</style>
+<!-- [END maps_add_map_div] -->
+
+<!--
+ The `defer` attribute causes the callback to execute after the full HTML
+ document has been parsed. For non-blocking uses, avoiding race conditions,
+ and consistent behavior across browsers, consider loading using Promises
+ with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+
+-->
+
+<!--
+  <script>
+        /**
+         * @license
+         * Copyright 2019 Google LLC. All Rights Reserved.
+         * SPDX-License-Identifier: Apache-2.0
+         */
+// @ts-nocheck TODO(jpoehnelt) remove when fixed
+// [START maps_geocoding_simple]
+        let map_one;
+        let marker;
+        let geocoder;
+        let responseDiv;
+        let response;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8,
+                center: { lat: -34.397, lng: 150.644 },
+                mapTypeControl: false,
+            });
+            geocoder = new google.maps.Geocoder();
+
+            const inputText = document.createElement("input");
+
+            inputText.type = "text";
+            inputText.placeholder = "Enter a location";
+
+            const submitButton = document.createElement("input");
+
+            submitButton.type = "button";
+            submitButton.value = "Geocode";
+            submitButton.classList.add("button", "button-primary");
+
+            const clearButton = document.createElement("input");
+
+            clearButton.type = "button";
+            clearButton.value = "Clear";
+            clearButton.classList.add("button", "button-secondary");
+            response = document.createElement("pre");
+            response.id = "response";
+            response.innerText = "";
+            responseDiv = document.createElement("div");
+            responseDiv.id = "response-container";
+            responseDiv.appendChild(response);
+
+            const instructionsElement = document.createElement("p");
+
+            instructionsElement.id = "instructions";
+            instructionsElement.innerHTML =
+                "<strong>Instructions</strong>: Enter an address in the textbox to geocode or click on the map to reverse geocode.";
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
+            map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
+            map.controls[google.maps.ControlPosition.LEFT_TOP].push(responseDiv);
+            marker = new google.maps.Marker({
+                map,
+            });
+            map.addListener("click", (e) => {
+                geocode({ location: e.latLng });
+            });
+            submitButton.addEventListener("click", () =>
+                geocode({ address: inputText.value })
+            );
+            clearButton.addEventListener("click", () => {
+                clear();
+            });
+            clear();
+        }
+
+        function clear() {
+            marker.setMap(null);
+            responseDiv.style.display = "none";
+        }
+
+        function geocode(request) {
+            clear();
+            geocoder
+                .geocode(request)
+                .then((result) => {
+                    const { results } = result;
+
+                    map.setCenter(results[0].geometry.location);
+                    marker.setPosition(results[0].geometry.location);
+                    marker.setMap(map);
+                    responseDiv.style.display = "block";
+                    response.innerText = JSON.stringify(result, null, 2);
+                    return results;
+                })
+                .catch((e) => {
+                    alert("Geocode was not successful for the following reason: " + e);
+                });}
+    </script>-->
+    <script>
+    /**
+     * @license
+     * Copyright 2019 Google LLC. All Rights Reserved.
+     * SPDX-License-Identifier: Apache-2.0
+     */
+    // [START maps_add_map]
+    // Initialize and add the map
+    function initMap() {
+        // [START maps_add_map_instantiate_map]
+        // The location of Uluru
+        const uluru = { lat: {{ tournoi.location.latitude }}, lng: {{ tournoi.location.longitude }} };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 5,
+            center: uluru,
+        });
+        // [END maps_add_map_instantiate_map]
+        // [START maps_add_map_instantiate_marker]
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+        });
+        // [END maps_add_map_instantiate_marker]
+    }
+
+    window.initMap = initMap;
+    // [END maps_add_map]
+
+</script>
+
+<script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfH1I3rEPVPWmSStivJ3XdIYmzFrqPlFQ&callback=initMap">
+</script>
+{% endblock %}
+</body>
+</html>

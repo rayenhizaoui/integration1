@@ -17,6 +17,7 @@ security:
             form_login:
                 login_path: app_login1
                 check_path: app_login1
+                default_target_path: app_show_users # Spécifie la route de pagination comme chemin par défaut après la connexion
 
             logout:
                 path: app_logout
@@ -28,3 +29,4 @@ security:
         - { path: ^/logout, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/showUsers/, roles: ADMIN }
         - { path: ^/user/add/, roles: SPECTATEUR }
+

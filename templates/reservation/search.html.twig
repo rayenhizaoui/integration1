@@ -1,0 +1,14 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block content %}
+    <h1>Résultats de la recherche pour "{{ searchTerm }}"</h1>
+
+    {% if reservation is not null %}
+        <!-- Redirige automatiquement vers la page des détails de la réservation -->
+        <script>window.location.href = "{{ path('app_reservation_show', {'id': reservation.id}) }}";</script>
+    {% else %}
+        <p>Aucune réservation trouvée pour "{{ searchTerm }}"</p>
+    {% endif %}
+{% endblock %}

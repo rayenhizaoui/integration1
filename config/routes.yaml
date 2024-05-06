@@ -15,7 +15,79 @@ show_page:
     path: /show
     controller: App\Controller\SecurityController::showPage
 
+show_back:
+    path: /evenement
+    controller: App\Controller\EvenementController::index    
+
 # config/routes.yaml
 app_login_check:
     path: /login_check
     methods: [POST]
+# Farah    
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+
+
+search:
+    path: /search
+    controller: App\Controller\EvenementController::search
+    methods: [GET]
+
+generate_pdf:
+    path: '/evenement/{id}/generate-pdf'
+    controller: 'App\Controller\EvenementController::generatePdf'
+
+app_template_route:
+    path: '/template-page'
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    defaults:
+        template: 'template-page.html.twig'
+
+#Anes
+app_jeu_index:
+    path: /jeu
+    controller: App\Controller\JeuController::index
+    methods: [GET]
+
+app_equipe_index:
+    path: /equipe
+    controller: App\Controller\EquipeController::index
+    methods: [GET]
+
+#hedil
+
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+search1:
+    path: /equipement/search
+    controller: App\Controller\EquipementController::search
+    methods: [GET]
+app_equipement_details:
+    path: '/equipement/details'
+    controller: 'App\Controller\EquipementController::details'
+
+search_reservation:
+    path: /search/reservation
+    controller: App\Controller\ReservationController::search
+    methods: [GET]
+
+generate_pdf1:
+    path: '/generate_pdf1'
+    controller: App\Controller\EquipementController::generatePdf1
+
+generate_excel:
+    path: /generate-excel
+    controller: App\Controller\EquipementController::generateExcel
+
+app_equipement_rate:
+    path: /rate
+    controller: App\Controller\EquipementController::rate
+    methods: ['POST']
+
+app_equipement_show:
+    path: '/equipement/{id}'
+    controller: 'App\Controller\EquipementController::show'
+    methods: ['GET']
+

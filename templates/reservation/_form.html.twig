@@ -1,0 +1,78 @@
+{# templates/reservation/_form.html.twig #}
+{{ form_start(form, {'attr': {'class': 'pt-3', 'novalidate': 'novalidate'}}) }}
+
+<div class="form-group">
+    {{ form_label(form.nom) }}
+    {{ form_widget(form.nom, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.nom.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.nom.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.datedebutres) }}
+    {{ form_widget(form.datedebutres, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.datedebutres.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.datedebutres.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.datefinres) }}
+    {{ form_widget(form.datefinres, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.datefinres.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.datefinres.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.type) }}
+    {{ form_widget(form.type, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.type.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.type.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.deposit) }}
+    {{ form_widget(form.deposit, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.deposit.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.deposit.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.idEquipement) }}
+    {{ form_widget(form.idEquipement, {'attr': {'class': 'form-control form-control-lg'}}) }}
+    {% if form.idEquipement.vars.errors %}
+        <div class="error" style="color: red;">
+            {% for error in form.idEquipement.vars.errors %}
+                <span>{{ error.message }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+
+{{ form_end(form) }}

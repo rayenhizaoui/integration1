@@ -1,0 +1,150 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Liste des Événements{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+        .table-responsive {
+            margin: 30px 0;
+        }
+        .table-wrapper {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+        .table-title {
+            padding: 16px 30px;
+            color: #fff;
+            background: #299be4;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+        table.table tr th, table.table tr td {
+            border-color: #e9e9e9;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+        .btn-info {
+            color: #fff;
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+        .btn-info:hover {
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+    </style>
+
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <h2>Index des <b>Événements</b></h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="search-box">
+                                <form action="{{ path('search') }}" method="GET">
+                                    <div class="input-group">
+                                        <input type="text" id="searchTerm" name="q" class="form-control" placeholder="Rechercher...">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary">Rechercher</button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <div class="form-group">
+                                <label for="sortSelect">Trier par :</label>
+                                <select class="form-control" id="sortSelect">
+                                    
+                                    <option value="nomevent">Nom</option>
+                                    <option value="lieu">Lieu</option>
+                                    <option value="dateevent">Date</option>
+                                    <option value="duree">Durée</option>
+                                </select>
+                            </div>
+                            <button id="sortButton" class="btn btn-info">Trier</button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Lieu</th>
+                            <th>Date</th>
+                            <th>Durée</th>
+                            
+                            <th>QR Code</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for evenement in pagination %}
+                            <tr>
+                                <td>{{ evenement.id }}</td>
+                                <td>{{ evenement.nomevent }}</td>
+                                <td>{{ evenement.lieu }}</td>
+                                <td>{{ evenement.dateevent|date('Y-m-d') }}</td>
+                                <td>{{ evenement.duree }}</td>
+                                
+                                <td><img src="data:image/png;base64,{{ evenement.qrcode }}" alt="QR Code" style="width:100px;"></td>
+                                <td>
+                                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-info">Afficher</a>
+                                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-primary">Modifier</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">Aucun enregistrement trouvé</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('app_evenement_new') }}" class="btn btn-success">Créer Nouveau</a>
+                
+                <!-- Affichage de la pagination -->
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#sortButton').click(function() {
+                var column = $('#sortSelect').val();
+                var order = 'asc'; // Par défaut, vous pouvez également ajouter un autre menu déroulant pour sélectionner l'ordre
+                var url = new URL(window.location);
+                url.searchParams.set('criteria', column + '_' + order);
+                window.location.href = url.toString();
+            });
+        });
+    </script>
+{% endblock %}

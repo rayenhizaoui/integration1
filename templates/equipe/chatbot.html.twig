@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+    <title>{% block title %}Chatbot{% endblock %}</title>
+     {% block css %}
+  <link rel="stylesheet" href="{{ asset('front/assets/css/fontawesome.css') }}">
+  <link rel="stylesheet" href="{{ asset('front/assets/css/templatemo-lugx-gaming.css') }}">
+  <link rel="stylesheet" href="{{ asset('front/assets/css/owl.css') }}">
+  <link rel="stylesheet" href="{{ asset('front/assets/css/animate.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <style>
+         .thumb img {
+      width: 100%;
+      height: auto;
+    }
+        /* Styles pour centrer le chatbox */
+        #chat-container {
+            position: relative; /* Position relative pour permettre le positionnement absolu du bouton */
+            display: flex;
+            flex-direction: column; /* Aligner les éléments en colonne */
+            justify-content: center; /* Aligner le contenu horizontalement au centre */
+            align-items: center; /* Aligner le contenu verticalement au centre */
+            height: 100vh; /* Hauteur de la fenêtre visible */
+            background-color: #f9f9f9; /* Couleur de fond par défaut */
+            transition: background-color 0.5s; /* Transition fluide pour le changement de couleur de fond */
+        }
+
+        #chatbox {
+            width: 600px; /* Largeur du chatbox */
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px; /* Ajouter un espacement en dessous du chatbox */
+            direction: ltr; /* Alignement de gauche à droite */
+        }
+
+        /* Style pour le bouton "Envoyer" */
+        #sendButton {
+            background-color: blue; /* Couleur de fond */
+            color: white; /* Couleur du texte */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px; /* Espacement entre le bouton et le chatbox */
+        }
+
+        #sendButton:hover {
+            background-color: darkblue; /* Couleur de fond au survol */
+        }
+
+        /* Styles pour les messages de l'utilisateur */
+        .user-message {
+            background-color: white;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: left; /* Alignement du texte à gauche */
+        }
+
+        /* Styles pour les messages du chatbot */
+        .chatbot-message {
+            background-color: lightgreen;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: right; /* Alignement du texte à droite */
+        }
+
+        /* Style pour le bouton "Allumer/Éteindre la lumière" */
+        #lightButton {
+            position: absolute; /* Position absolue pour placer le bouton en haut à droite */
+            top: 10px; /* Marge depuis le haut */
+            right: 10px; /* Marge depuis la droite */
+            background-color: #ccc;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #lightButton:hover {
+            background-color: #999; /* Couleur de fond au survol */
+        }
+
+        /* Style pour les boutons emoji */
+        #emojis {
+            margin-top: 10px;
+        }
+
+        #emojis button {
+            font-size: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+         {% endblock %}
+    </style>
+    {% block header %}
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- ***** Logo Start ***** -->
+            <a href="{{ path('app_home') }}" class="logo">
+              <img src="{{ asset('front/assets/images/logoo.png') }}" alt="" style="width: 60px;">
+            </a></nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% endblock %}
+</head>
+<body>
+   {% block content %}
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Chatbot</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div id="chat-container">
+        <div id="chatbox">
+            <div id="chatlog"></div>
+            <input type="text" id="userInput">
+            <button id="sendButton" onclick="sendMessage()">Envoyer</button> <!-- Bouton Envoyer sous le champ de saisie -->
+            <!-- Ajouter les boutons d'émojis ici -->
+            <div id="emojis">
+                <button onclick="sendEmoji('\uD83D\uDC4D')">👍</button> 
+                <button onclick="sendEmoji('\uD83D\uDC9E')">💞</button>
+                <button onclick="sendEmoji('\uD83D\uDE00')">😀</button>
+                <button onclick="sendEmoji('\uD83D\uDE0D')">😍</button>
+                <button onclick="sendEmoji('\uD83D\uDE20')">😠</button> 
+            </div>
+        </div>
+        <a href="{{ path('app_equipe_index_front') }}">Retour</a>
+    </div>
+    <button id="lightButton" onclick="toggleLight()">Allumer/Éteindre la lumière</button> <!-- Bouton pour changer l'état de la lumière -->
+
+    <script>
+        // Fonction pour envoyer un message lorsque l'utilisateur appuie sur Entrée
+        document.getElementById("userInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        // Fonction pour envoyer un emoji lorsque l'utilisateur clique sur un bouton
+        function sendEmoji(emoji) {
+            var chatlog = document.getElementById('chatlog');
+            chatlog.innerHTML += '<div class="user-message"><strong>Utilisateur:</strong> ' + emoji + '</div>';
+            var response = emoji; // Répondre avec le même émoji
+            chatlog.innerHTML += '<div class="chatbot-message"><strong>Chatbot:</strong> ' + response + '</div>';
+        }
+
+        // Fonction pour envoyer un message
+        function sendMessage() {
+            var userInput = document.getElementById('userInput').value;
+            var chatlog = document.getElementById('chatlog');
+            chatlog.innerHTML += '<div class="user-message"><strong>Utilisateur:</strong> ' + userInput + '</div>';
+            var response = getChatbotResponse(userInput); // Obtenir la réponse du chatbot
+            chatlog.innerHTML += '<div class="chatbot-message"><strong>Chatbot:</strong> ' + response + '</div>';
+            document.getElementById('userInput').value = ''; // Effacer le champ de saisie après l'envoi
+        }
+
+        // Fonction pour obtenir la réponse du chatbot
+        function getChatbotResponse(userInput) {
+            // Définir les réponses du chatbot
+            const conversations = new Map([
+                ["salut", "Salut!"],
+                ["cv", "Oui, ça va bien, et vous?"],
+                ["quel est le prochain match?", "Le prochain match est prévu pour demain à 18h."],
+                ["quel est votre nom?", "Je suis un chatbot."],
+                ["quel est votre équipe?", "Bien sûr, je suis un grand fan de Barcelone!"],
+                ["quel jeu jouez-vous?", "Nous jouons actuellement à [Nom du jeu]."], // Remplacer [Nom du jeu] par le nom réel du jeu
+                // Ajouter d'autres conversations ici...
+            ]);
+
+            // Vérifier si la conversation est définie dans la carte
+            if (conversations.has(userInput.toLowerCase())) {
+                return conversations.get(userInput.toLowerCase());
+            } else {
+                return "Désolé, je ne comprends pas. Pouvez-vous reformuler votre question?";
+            }
+        }
+
+        // Fonction pour changer l'état de la lumière et mettre à jour le fond de l'interface
+        function toggleLight() {
+            var chatContainer = document.getElementById('chat-container');
+            var lightButton = document.getElementById('lightButton');
+
+            // Vérifier l'état actuel de la lumière
+            if (chatContainer.style.backgroundColor === "black") {
+                // Si la lumière est éteinte, allumer la lumière en mettant le fond en blanc
+                chatContainer.style.backgroundColor = "#f9f9f9";
+                lightButton.textContent = "Allumer la lumière";
+            } else {
+                // Si la lumière est allumée, éteindre la lumière en mettant le fond en noir
+                chatContainer.style.backgroundColor = "black";
+                lightButton.textContent = "Éteindre la lumière";
+            }
+        }
+    </script>
+      {% endblock %}
+
+</body>
+</html>

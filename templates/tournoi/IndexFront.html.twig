@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+		<title>Equipements</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/owl.carousel.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/magnific-popup.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/font-awesome.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/themify-icons.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/nice-select.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/flaticon.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/gijgo.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/animate.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/slick.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/slicknav.css') }}">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/owl.carousel.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/magnific-popup.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/font-awesome.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/themify-icons.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/nice-select.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/flaticon.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/jquery-ui.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/gijgo.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/animate.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/slick.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/slicknav.css') }}">
+		<link rel="stylesheet" href="{{ asset('StyleMaissa/css/style.css') }}">
+
+
+		<link
+		rel="stylesheet" href="{{ asset('css/style.css') }}">
+		<!-- Additional CSS Files -->
+		<link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css')}}">
+		<link rel="stylesheet" href="{{ asset('assets/css/templatemo-lugx-gaming.css')}}">
+		<link rel="stylesheet" href="{{ asset('assets/css/owl.css')}}">
+		<link rel="stylesheet" href="{{ asset('assets/css/animate.css')}}">
+		<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+		<link
+		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--
+	
+	    TemplateMo 589 lugx gaming
+	
+	    https://templatemo.com/tm-589-lugx-gaming
+	
+	    -->
+	</head>
+
+	<body>
+
+		<!-- ***** Preloader Start ***** -->
+		<div id="js-preloader" class="js-preloader">
+			<div class="preloader-inner">
+				<span class="dot"></span>
+				<div class="dots">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+		<!-- ***** Preloader End ***** -->
+
+		<!-- ***** Header Area Start ***** -->
+		<header class="header-area header-sticky">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<nav
+							class="main-nav">
+							<!-- ***** Logo Start ***** -->
+							<a href="index.html" class="logo">
+								<img src="assets/images/logoo.png" alt="" style="width: 60px;">
+							</a>
+							<!-- ***** Logo End ***** -->
+							<!-- ***** Menu Start ***** -->
+							<ul class="nav">
+								<li>
+									<a href="{{ path('app_home') }}" class="active">Home</a>
+								</li>
+								<li>
+									<a href="{{ path('app_equipement_indexFront') }}">Equipements</a>
+								</li>
+								<li>
+									<a href="{{ path('index_Front') }}">Tournoi</a>
+								</li>
+								<li>
+									<a href="{{ path('app_evenement_indexFront') }}">Evenements</a>
+								</li>
+								<li>
+									<a href="{{ path('app_equipe_index_front') }}">Equipes</a>
+								</li>
+								<li>
+									<a href="{{ path('app_billet_add') }}">Billets</a>
+								</li>
+								<li>
+									<a href="{{ path('app_user_add') }}">Inscription</a>
+								</li>
+								<li>
+									<a href="{{ path('app_login') }}">Se connecter</a>
+								</li>
+							</ul>
+							<a class='menu-trigger'>
+								<span>Menu</span>
+							</a>
+							<!-- ***** Menu End ***** -->
+						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- ***** Header Area End ***** -->
+
+		<div class="page-heading header-text">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<h3>Evenements</h3>
+						<span class="breadcrumb">
+							<a href="#">Home</a>
+							> Evenements</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="section trending">
+			<div class="container">
+				<ul class="trending-filter">
+					<li>
+						<a class="is_active" href="#!" data-filter="*">Show All</a>
+					</li>
+					<li>
+						<a href="#!" data-filter=".adv">Adventure</a>
+					</li>
+
+				</ul>
+
+
+				<!-- Scripts -->
+				<!-- Bootstrap core JavaScript -->
+				<script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
+				<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+				<script src="{{ asset('assets/js/isotope.min.js')}}"></script>
+				<script src="{{ asset('assets/js/owl-carousel.js')}}"></script>
+				<script src="{{ asset('assets/js/counter.js')}}"></script>
+				<script src="{{ asset('assets/js/custom.js')}}"></script>
+			</div>
+		</div>
+	</body>
+</html></div></div>{% block body %}<div class="popular_places_area">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-4">
+			{% include 'tournoi/filter_form.html.twig' with {form:form} only %}
+		</div>
+
+		<div class="col-lg-8">
+			<div class="d-flex justify-content-end mb-2">
+				<button class="btn btn-warning" width="5">{{ knp_pagination_sortable(tournois,'Tri Frais','t.fraisParticipant') }}
+				</button>
+
+				<button class="btn btn-warning" width="5">{{ knp_pagination_sortable(tournois,'Aa','t.NomTournoi') }}
+				</button>
+			</div>
+
+
+			<div class="row">
+				{% for tournoi in tournois %}
+					<tr>
+
+
+						<div class="col-lg-6 col-md-6">
+							<div class="single_place">
+								<div class="thumb">
+
+
+									<img src="{{ asset('/upload/'~tournoi.image) }} " alt="" height="150" width="150">
+
+									<a href="#" class="prise">{{ tournoi.fraisParticipant }}</a>
+								</div>
+								<div class="place_info">
+									<a href="{{ path('app_tournoi_show_front', {'id': tournoi.id}) }}">
+										<h3>{{ tournoi.NomTournoi }}</h3>
+									</a>
+									<p>
+										<strong>{{ tournoi.typeJeu }}</strong>
+									</p>
+									{#                                        <p>{{ event.venue.venueName }}</p>#}
+									<div class="rating_days d-flex justify-content-between">
+										<span class="d-flex justify-content-center align-items-center">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<a href="#">(20 Review)</a>
+										</span>
+										<div class="days">
+											<i class="fa fa-clock-o"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					{% else %}
+						<tr>
+							<td colspan="9">no records found</td>
+						</tr>
+					{% endfor %}
+
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="more_place_btn text-center">
+							<div>
+								{{ knp_pagination_render(tournois) }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>{% endblock %}</body><footer><div class="container">
+<div class="col-lg-12">
+	<p>Copyright © 2048 L'Esport Company. All rights reserved. &nbsp;&nbsp;
+		<a rel="nofollow" href="https://templatemo.com" target="_blank"></a>
+	</p>
+</div></div></footer></html>

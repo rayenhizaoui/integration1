@@ -85,6 +85,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $billets;
 
+
+
+
+
     public function getUserIdentifier(): string
     {
         return $this->username;
@@ -94,6 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->billets = new ArrayCollection();
+        // $this->banned = false;
     }
 
     public function getId(): ?int
@@ -212,17 +217,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeBillet(Billet $billet): self
-    {
-        if ($this->billets->removeElement($billet)) {
-            // set the owning side to null (unless already changed)
-            if ($billet->getUser() === $this) {
-                $billet->setUser(null);
-            }
-        }
+    // public function removeBillet(Billet $billet): self
+    // {
+    //     if ($this->billets->removeElement($billet)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($billet->getUser() === $this) {
+    //             $billet->setUser(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
 
 
@@ -245,4 +250,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
+
+
+    // public function isBanned(): bool
+    // {
+    //     return $this->banned;
+    // }
+
+    // public function setBanned(bool $banned): self
+    // {
+    //     $this->banned = $banned;
+    //     return $this;
+    // }
+
+    // public function getBanned(): ?bool
+    // {
+    //     return $this->banned;
+    // }
 }

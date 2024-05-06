@@ -1,0 +1,164 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Index des Récompenses{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+        .table-responsive {
+            margin: 30px 0;
+        }
+        .table-wrapper {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+        .table-title {
+            padding: 16px 30px;
+            color: #fff;
+            background: #299be4;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+        table.table tr th, table.table tr td {
+            border-color: #e9e9e9;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+        .btn-info {
+            color: #fff;
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+        .btn-info:hover {
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+        .chart-container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+
+    <div class="container">
+        <!-- Graphique circulaire pour afficher les statistiques des récompenses -->
+        <div class="chart-container">
+            <canvas id="recompenseChart"></canvas>
+        </div>
+
+        <!-- Tableau des récompenses -->
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <h2>Index des <b>Récompenses</b></h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                          
+                        <div class="col-sm-6 text-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info" data-sort="asc">Tri Croissant</button>
+                                <button type="button" class="btn btn-info" data-sort="desc">Tri Décroissant</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Équipe gagnante</th>
+                            <th>Type de Récompense</th>
+                            <th>Date de Récompense</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recompense in pagination %}
+                            <tr>
+                                <td>{{ recompense.id }}</td>
+                                <td>{{ recompense.equipegagnante }}</td>
+                                <td>{{ recompense.typerecompense }}</td>
+                                <td>{{ recompense.daterecompense|date('Y-m-d') }}</td>
+                                <td>
+                                    <a href="{{ path('app_recompense_show', {'id': recompense.id}) }}" class="btn btn-info">Afficher</a>
+                                    <a href="{{ path('app_recompense_edit', {'id': recompense.id}) }}" class="btn btn-primary">Modifier</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="6">Aucun enregistrement trouvé</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{{ path('app_recompense_new') }}" class="btn btn-success">Créer Nouveau</a>
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+
+ <script>
+     $(document).ready(function(){
+    // Vérifier si les écouteurs d'événements sont déjà attachés
+    var eventsAttached = false;
+
+    // Fonction de tri
+    function sortRecompenses(order) {
+        var rows = $('table tbody tr').get();
+        rows.sort(function(a, b) {
+            var nameA = $(a).children('td:eq(1)').text().toUpperCase(); // Récupérer le nom de la première colonne
+            var nameB = $(b).children('td:eq(1)').text().toUpperCase(); // Récupérer le nom de la deuxième colonne
+            
+            if(order === 'asc') {
+                return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0; // Tri ascendant
+            } else {
+                return (nameA > nameB) ? -1 : (nameA < nameB) ? 1 : 0; // Tri descendant
+            }
+        });
+        $.each(rows, function(index, row) {
+            $('table').children('tbody').append(row);
+        });
+    }
+
+    // Attachement des écouteurs d'événements uniquement si ce n'est pas déjà fait
+    if (!eventsAttached) {
+        // Écouteur d'événement pour le tri ascendant
+        $('.btn-info[data-sort="asc"]').on('click', function(){
+            sortRecompenses('asc');
+        });
+        
+        // Écouteur d'événement pour le tri descendant
+        $('.btn-info[data-sort="desc"]').on('click', function(){
+            sortRecompenses('desc');
+        });
+
+        // Mettre à jour le statut pour indiquer que les écouteurs d'événements sont attachés
+        eventsAttached = true;
+    }
+});
+
+    </script>
+{% endblock %}

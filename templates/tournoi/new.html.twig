@@ -1,0 +1,18 @@
+{% block title %}New Tournoi
+{% endblock %}
+
+{% block body %}
+	<h1>Create new Tournoi</h1>
+
+	{{ include('tournoi/_form.html.twig') }}
+
+	<a href="{{ path('app_tournoi_index') }}">
+		<button class="btn btn-outline-primary">
+
+
+			<span class="btn-label">
+				<i class="fa fa-chevron-left"></i>
+			</span>
+			Back To List</button>
+	</a>
+{% endblock %}

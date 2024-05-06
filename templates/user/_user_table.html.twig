@@ -1,0 +1,47 @@
+<!-- _user_table.html.twig -->
+
+<thead>
+	<tr>
+		<th>Id</th>
+		<th>Cin</th>
+		<th>Username</th>
+		<th>Numero</th>
+		<th>Email</th>
+		<th>Adresse</th>
+		<th>Password</th>
+		<th>Role</th>
+		<th>Action</th>
+	</tr>
+</thead>
+<tbody>
+	{% for user in users %}
+		<tr>
+			<td>{{ user.id }}</td>
+			<td>{{ user.cin }}</td>
+			<td>{{ user.username }}</td>
+			<td>{{ user.numero }}</td>
+			<td>{{ user.email }}</td>
+			<td>{{ user.adresse }}</td>
+			<td>{{ user.password }}</td>
+			<td>{{ user.role }}</td>
+			<td>
+				{% if user.banned %}
+					<span class="badge badge-danger">Banned</span>
+				{% else %}
+					<span class="badge badge-success">Active</span>
+				{% endif %}
+				{% if user.banned %}
+					<a href="{{ path('app_user_unban', {'id': user.id}) }}" class="btn btn-success">Unban</a>
+				{% else %}
+					<a href="{{ path('app_user_ban', {'id': user.id}) }}" class="btn btn-danger">Ban</a>
+				{% endif %}
+				<a href="{{ path('app_edit_users', {'id': user.id}) }}" class="settings" title="Settings" data-toggle="tooltip">
+					<i class="material-icons">&#xE8B8;</i>
+				</a>
+				<a href="{{ path('app_user_delete', {'id': user.id}) }}" class="delete" title="Delete" data-toggle="tooltip">
+					<i class="material-icons">&#xE5C9;</i>
+				</a>
+			</td>
+		</tr>
+	{% endfor %}
+</tbody>

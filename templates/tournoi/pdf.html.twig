@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+
+<div id="whatToPrint">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+
+    <style>@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+
+
+
+
+        body {
+            padding:20px;
+            font-family:'Source Sans Pro', sans-serif;
+            margin:0;
+
+
+        }
+
+        h1,h2,h3,h4,h5,h6 {
+            margin:0;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin-right:auto;
+
+            margin-left:auto;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+            border-collapse: collapse;
+            border-radius: 20px;
+
+
+
+        }
+
+        .table {
+            width:1530px;
+            border: 2px solid #1c294e;
+            border-radius: 20px;
+
+        }
+
+        .table-header {
+            display:flex;
+            width:1500px;
+            background:darkmagenta;
+            height: 50px;
+            font-size: 30px;
+            font-family: -apple-system;
+            margin: 3px;
+            border-radius: 30px;
+
+        }
+        .table-content {
+
+        }
+
+        .table-row {
+            display:flex;
+            width:1500px;
+            margin-bottom: 20px;
+
+            height: 90px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #000;
+            background-color: lightgray;
+
+
+        }
+
+        .table-data, .header__item {
+            flex: 1 1 20%;
+            text-align:center;
+            font-family: Cambria;
+
+
+        }
+
+        .header__item {
+            color:white;
+            text-decoration:none;
+            position:relative;
+            display:inline-block;
+
+
+        }
+    </style>
+    <style>
+        *{padding: 0; margin: 0; box-sizing: border-box;}
+        body{height: 900px;}
+        header {
+            background: url('http://www.autodatz.com/wp-content/uploads/2017/05/Old-Car-Wallpapers-Hd-36-with-Old-Car-Wallpapers-Hd.jpg');
+            text-align: center;
+            width: 100%;
+            height: auto;
+            background-size: cover;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 85% 85% / 30%;
+        }
+        header .overlay{
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            color: #FFF;
+            text-shadow: 1px 1px 1px #333;
+            background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
+
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 60px;
+            margin-bottom: 30px;
+        }
+
+        h3, p {
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 30px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: #333;
+            background: #fff;
+            margin-bottom: 50px;
+            box-shadow: 0 3px 20px 0 #0000003b;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+    </style>
+    <header>
+        <div class="overlay">
+            <h1>Simply The Best</h1>
+            <h2>Esport Liste Tournoi</h2>
+         </div>
+    </header>
+    <div class="container">
+
+        <div class="table">
+            <div class="table-header">
+                <div class="header__item"><a id="name"  >Title</a></div>
+                <div class="header__item"><a id="draws"  >Image</a></div>
+                <div class="header__item"><a id="losses"  >Nombre De Participants</a></div>
+                <div class="header__item"><a id="total"  >Type de Jeu</a></div>
+                <div class="header__item"><a id="total"  >Frais Participant</a></div>
+                <div class="header__item"><a id="total"  >Location</a></div>
+
+            </div>
+
+            <div class="table-content" >
+                {% for tournoi in tournois %}
+                <div class="table-row" >
+                    <div class="table-data">{{ tournoi.nomTournoi }}</div>
+                    <div class="table-data"><img src="{{ asset('/upload/'~tournoi.image) }} " height="90" width="150"></div>
+                    <div class="table-data">{{ tournoi.nombreParticipants }}</div>
+                    <div class="table-data">{{ tournoi.typeJeu }}</div>
+                    <div class="table-data">{{ tournoi.fraisParticipant }}</div>
+                  <div class="table-data">{{ tournoi.location.adresse }}</div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+        function Convert_HTML_To_PDF() {
+            var elementHTML = document.getElementById('whatToPrint');
+
+            html2canvas(elementHTML, {
+                useCORS: true,
+                onrendered: function(canvas) {
+                    var pdf = new jsPDF('p', 'pt', 'letter');
+
+                    var pageHeight = 1500;
+                    var pageWidth = 1500;
+                    for (var i = 0; i <= elementHTML.clientHeight / pageHeight; i++) {
+                        var srcImg = canvas;
+                        var sX = 0;
+                        var sY = pageHeight * i; // start 1 pageHeight down for every new page
+                        var sWidth = pageWidth;
+                        var sHeight = pageHeight;
+                        var dX = 0;
+                        var dY = 0;
+                        var dWidth = pageWidth;
+                        var dHeight = pageHeight;
+
+                        window.onePageCanvas = document.createElement("canvas");
+                        onePageCanvas.setAttribute('width', pageWidth);
+                        onePageCanvas.setAttribute('height', pageHeight);
+                        var ctx = onePageCanvas.getContext('2d');
+                        ctx.drawImage(srcImg, sX, sY, sWidth, sHeight, dX, dY, dWidth, dHeight);
+
+                        var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+                        var width = onePageCanvas.width;
+                        var height = onePageCanvas.clientHeight;
+
+                        if (i > 0) // if we're on anything other than the first page, add another page
+                            pdf.addPage(612, 864); // 8.5" x 12" in pts (inches*72)
+
+                        pdf.setPage(i + 1); // now we declare that we're working on that page
+                        pdf.addImage(canvasDataURL, 'PNG', 50, 70, (width * .35), (height * .35)); // add content to the page
+                    }
+
+                    // Save the PDF
+                    pdf.save('document.pdf');
+                }
+            });
+        }
+    </script>
+</div>
+<div id="pdf-btns">
+    <button type="button" class="btn btn-primary" id="get-pdf" onclick="Convert_HTML_To_PDF();">Save as PDF</button>
+</div>
+</html>

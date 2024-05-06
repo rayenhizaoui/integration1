@@ -1,0 +1,94 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Evenement Details{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .table th, .table td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .btn-custom {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-custom:hover {
+            color: #fff;
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+    </style>
+    <div class="container">
+        <div class="table-responsive">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <h1>Evenement Details</h1>
+                </div>
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Event Name</th>
+                        <td>{{ evenement.nomevent }}</td>
+                    </tr>
+                    <tr>
+                        <th>Location</th>
+                        <td>{{ evenement.lieu }}</td>
+                    </tr>
+                    <tr>
+                        <th>Recompense</th>
+                        <td>{{ evenement.idRecompense.typerecompense }}</td>
+                    </tr>
+                    <tr>
+                        <th>Event Date</th>
+                        <td>{{ evenement.dateevent ? evenement.dateevent|date('Y-m-d') : 'Not set' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Duration</th>
+                        <td>{{ evenement.duree }}</td>
+                    </tr>
+                    
+  
+
+                    <tr>
+                        <th>QR Code</th>
+                        <td>
+                            <img src="data:image/png;base64,{{ evenement.qrcode }}" alt="QR Code"
+                                 style="max-width: 100px; height: auto;">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a href="{{ path('app_evenement_indexFront') }}" class="btn btn-custom">Back to List</a>
+                <!-- Bouton de téléchargement PDF -->
+                <a href="{{ path('generate_pdf', {'id': evenement.id}) }}" class="btn btn-custom">Télécharger PDF</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

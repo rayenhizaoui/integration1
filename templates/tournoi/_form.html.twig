@@ -1,0 +1,39 @@
+<link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+/>
+
+<!-- Bootstrap icons -->
+<link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+/>
+
+
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="mb-3">
+        {{ form_row(form.NomTournoi ,{ 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.NomEquipe ,{ 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.NombreParticipants ,{ 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.duree ,{ 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.typeJeu ,{ 'attr': {'class': 'form-control'} }) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.fraisParticipant ,{ 'attr': {'class': 'form-control'} }) }}
+    </div><div class="mb-3">
+        {{ form_row(form.Location ,{ 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+</div>
+<button class="btn btn-success " class="btn"><i class="fa fa-check-square" style="font-size:18px"></i>{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

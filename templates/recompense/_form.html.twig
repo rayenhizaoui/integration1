@@ -1,0 +1,25 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+<div class="form-group">
+    {{ form_label(form.equipegagnante) }}
+    {{ form_errors(form.equipegagnante) }}
+    {{ form_widget(form.equipegagnante, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.typerecompense) }}
+    {{ form_errors(form.typerecompense) }}
+    {{ form_widget(form.typerecompense, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.daterecompense) }}
+    {{ form_errors(form.daterecompense) }}
+    {{ form_widget(form.daterecompense, {'attr': {'class': 'form-control'}}) }}
+</div>
+
+
+
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+{{ form_end(form) }}

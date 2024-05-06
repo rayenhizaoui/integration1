@@ -110,7 +110,7 @@ class SecurityController extends AbstractController
 
     public function onLogoutSuccess(): Response
     {
-        return new RedirectResponse($this->generateUrl('app_login1'));
+        return new RedirectResponse($this->generateUrl('app_login'));
     }
 
     #[Route(path: '/show', name: 'show_page')]
@@ -122,12 +122,34 @@ class SecurityController extends AbstractController
 
 
 
-    #[Route('/showUsers', name: 'app_show_users')]
+    /*    #[Route('/showUsers', name: 'app_show_users')]
     public function showUsers(UserRepository $repository)
     {
         $users = $repository->findAll();
         return $this->render('user/show.html.twig', [
             'users' => $users
+
+        ]);
+    }*/
+
+    #[Route('/showUsers/{page}', name: 'app_show_users')]
+    public function showUsers(UserRepository $repository, $page = 1)
+    {
+        $limit = 5; // Nombre d'utilisateurs par page
+        $offset = ($page - 1) * $limit;
+
+        // Récupérer les utilisateurs pour la page actuelle
+        $users = $repository->findBy([], null, $limit, $offset);
+
+        // Calculer le nombre total d'entrées et le nombre total de pages
+        $totalUsers = count($repository->findAll());
+        $totalPages = ceil($totalUsers / $limit);
+
+        return $this->render('user/show.html.twig', [
+            'users' => $users,
+            'total_entries' => $totalUsers,
+            'total_pages' => $totalPages,
+            'page' => $page
         ]);
     }
 }

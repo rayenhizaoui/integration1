@@ -1,0 +1,27 @@
+{% block title %}Envoyer un e-mail
+{% endblock %}
+
+{% block body %}
+	<h1>Envoyer un e-mail</h1>
+
+	{{ form_start(form) }}
+
+	<div class="form-group">
+		{{ form_label(form.recipient, 'Destinataire') }}
+		{{ form_widget(form.recipient, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<div class="form-group">
+		{{ form_label(form.subject, 'Objet de l\'email') }}
+        {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.body, 'Corps de l\'email') }}
+		{{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+	</div>
+
+	<button type="submit" name="send" class="btn btn-primary">Envoyer</button>
+
+	{{ form_end(form) }}
+{% endblock %}

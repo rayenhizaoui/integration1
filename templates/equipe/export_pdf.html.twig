@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des équipes</title>
+    <style>
+        /* Styles CSS pour le PDF */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: purple;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th.blue-border, td.blue-border {
+            border: 2px solid blue;
+            color: blue;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des équipes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="blue-border">ID</th>
+                <th class="blue-border">Nom</th>
+                <th class="blue-border">liste de joueur</th>
+                <th class="blue-border">Nombre de joueurs</th>
+                <th class="blue-border">ID Jeu</th>
+                <!-- Ajoutez d'autres en-têtes de colonnes si nécessaire -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipe in equipes %}
+                <tr>
+                    <td>{{ equipe.id }}</td>
+                    <td>{{ equipe.nom }}</td>
+                    <td>{{ equipe.listeJoueur }}</td>
+                    <td>{{ equipe.nbrJoueur }}</td>
+                    <td>{{ equipe.jeu.id }}</td>
+                    <!-- Ajoutez d'autres données de colonnes si nécessaire -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+     <a href="{{ path('app_equipe_index') }}">Retour</a>
+</body>
+</html>

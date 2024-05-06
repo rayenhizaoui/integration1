@@ -1,0 +1,149 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css"/>
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+        .section {
+            padding: 60px 0;
+        }
+        .section-heading {
+            margin-bottom: 40px;
+        }
+        .section-heading h2 {
+            font-size: 32px;
+        }
+        .main-button a {
+            display: inline-block;
+            background-color: #299be4;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .main-button a:hover {
+            background-color: #1c8cd7;
+        }
+        .item {
+            margin-bottom: 30px;
+        }
+        .item .thumb {
+            position: relative;
+        }
+        .item .thumb img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .item .thumb .price {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 15px;
+            font-size: 16px;
+        }
+        .item .down-content {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .item .down-content .category {
+            color: #299be4;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .item .down-content h4 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+    </style>
+
+    <div class="section trending">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="section-heading">
+                        <h6>Liste des Equipements</h6>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="main-button">
+                        <a href="{{ path('app_reservation_new') }}">Reserver</a>
+                    </div>
+                </div>
+                {% for equipement in equipements %}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="item">
+                            <div class="thumb">
+                                <a href="{{ path('app_equipement_show', {'id': equipement.id}) }}"><img
+                                            src="{{ asset('uploads/images/' ~ equipement.image) }}"
+                                            alt="{{ equipement.nom }}"></a>
+                            </div>
+                            <div class="down-content">
+                                <span class="category">Nom : </span>
+                                <h4>{{ equipement.nom }}</h4>
+                                <div class="rateYo" data-rating="{{ equipement.rating|default(0) }}" data-equipement-id="{{ equipement.id }}"></div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-12">
+                        <p>No equipements found.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        $(".rateYo").each(function() {
+            var $rateYo = $(this);
+            var initialRating = parseFloat($rateYo.data('rating')) || 0;
+            initialRating = Math.min(Math.max(initialRating, 0), 5); // Clamp the initial rating between 0 and 5
+            $rateYo.rateYo({
+                starWidth: "20px",
+                fullStar: true,
+                rating: initialRating,
+                onSet: function(rating, rateYoInstance) {
+                    var equipementId = $rateYo.data('equipement-id');
+                    $.ajax({
+                        url: "/rate", // Modifier cette URL avec l'URL absolue correspondant à votre route Symfony
+                        method: "POST",
+                        data: {
+                            id: equipementId,
+                            rating: rating
+                        },
+                        success: function(response) {
+                            console.log('Rating updated successfully!');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error updating rating:', status, error);
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+{% endblock %}

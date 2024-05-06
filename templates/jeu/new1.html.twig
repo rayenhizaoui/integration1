@@ -1,0 +1,27 @@
+{% extends 'basepageFront1.html.twig' %}
+
+{% block title %}Nouvelle jeu{% endblock %}
+{% block header %}Ajouter Jeu {% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1>Créer une nouvelle jeu</h1>
+
+                    {{ include('jeu/_form.html.twig') }}
+
+                <a href="{{ path('app_jeu_index_front') }}">Retour</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

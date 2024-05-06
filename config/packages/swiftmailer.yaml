@@ -1,0 +1,8 @@
+swiftmailer:
+    transport: smtp
+    host: smtp.gmail.com
+    username: 'rayenlorkha1@gmail.com'
+    password: 'bjdsehauqdfzrrim'
+    port: 587
+    encryption: ssl
+    auth_mode: login

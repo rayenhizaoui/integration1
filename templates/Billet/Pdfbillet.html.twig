@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>List Users</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-KHC/EOuZxPV+yXSiP/zHVtU8gBXFr7v2R53WX8Es8wG+1QX9eFJN+rEJqQ9o+SZ1cNB5mlYq0OlA/xA28lMuYg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				font-size: 12px;
+				color: LightSeaGreen;
+				margin: 10px;
+				padding: 10px;
+				/* background-color: black; */
+
+			}
+
+			.container {
+				width: 100%;
+				margin: 0 auto;
+				padding: 40px;
+				color: DarkSlateGrey;
+			}
+
+			.logo {
+				text-align: center;
+				margin-bottom: 20px;
+			}
+
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				color: black;
+			}
+
+			th,
+			td {
+				border: 1px solid #ddd;
+				padding: 8px;
+				text-align: left;
+				background-color: SkyBlue;
+			}
+
+			th {
+				background-color: Teal;
+				color: white; /* Couleur bleue pour le titre */
+			}
+
+			.info-text {
+				margin-bottom: 20px;
+			}
+		</style>
+
+	</head>
+	<body>
+
+
+		<!--<h1 style="color: blue;">Liste des Billets</h1>-->
+		<!-- Balise de titre avec texte coloré en bleu -->
+
+			<h1><i class="fas fa-list"> </i>
+			Bienvenue ! voici la Liste des Billets</h1>
+		<div class="container">
+			<div class="info-text">
+				Une interface de listes de billets bien conçue est comme un catalogue bien organisé, offrant une vue claire et détaillée des différents billets disponibles. Chaque élément de la liste devrait présenter des informations essentielles telles que le titre du billet, la date et l'heure de l'événement, le lieu, et éventuellement le prix et la disponibilité des billets. La conception de l'interface doit permettre une navigation fluide, offrant des options de tri et de filtrage pour aider les utilisateurs à trouver rapidement ce qu'ils recherchent. Des fonctionnalités supplémentaires telles que des images des événements, des liens vers des informations détaillées et des options de réservation directe ajoutent de la valeur à l'expérience utilisateur, rendant la recherche et l'achat de billets aussi simples et agréables que possible.
+			</div>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Cin</th>
+						<th>Type</th>
+						<th>Email</th>
+						<th>Place</th>
+						<th>User</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for billet in billets %}
+						<tr>
+							<td>{{ billet.id }}</td>
+							<td>{{ billet.cin }}</td>
+							<td>{{ billet.type }}</td>
+							<td>{{ billet.email }}</td>
+							<td>{{ billet.place }}</td>
+							<td>{{ billet.user.username }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
