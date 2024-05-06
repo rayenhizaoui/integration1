@@ -1,27 +1,26 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Edit Local{% endblock %}
+{% block title %}Edit Local
+{% endblock %}
 
 {% block body %}
 
-    <h1>Edit Local</h1>
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-    />
+	<h1>Edit Local</h1>
+	<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-    <!-- Bootstrap icons -->
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
-    />
+	<!-- Bootstrap icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"/>
 
-    {{ include('local/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('local/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_local_index') }}"><button  class="btn btn-outline-primary">
+	<a href="{{ path('app_local_index') }}">
+		<button class="btn btn-outline-primary">
 
 
-            <span class="btn-label"><i class="fa fa-chevron-left"></i></span> Back To List</button></a>
+			<span class="btn-label">
+				<i class="fa fa-chevron-left"></i>
+			</span>
+			Back To List</button>
+	</a>
 
-    {{ include('local/_delete_form.html.twig') }}
+	{{ include('local/_delete_form.html.twig') }}
 {% endblock %}

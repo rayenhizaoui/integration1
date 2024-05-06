@@ -287,7 +287,10 @@ $('[data-toggle="tooltip"]').tooltip();
 									<img src="{{ asset('uploads/images/' ~ equipement.image) }}" alt="Equipement Image" style="width:100px; height:auto;">
 								</td>
 								<td>{{ equipement.rating }}</td>
-								<td><img src="data:image/png;base64,{{ equipement.qrcode }}" alt="QR Code"></td>
+								<td>
+									<img src="data:image/png;base64,{{ equipement.qrcode }}" alt="QR Code" style="width:300px; height:300px;">
+								</td>
+
 								<td>
 									<a href="{{ path('app_equipement_show', {'id': equipement.id}) }}">affciher</a>
 									<a href="{{ path('app_equipement_edit', {'id': equipement.id}) }}">modifier</a>
@@ -307,8 +310,6 @@ $('[data-toggle="tooltip"]').tooltip();
 			</div>
 		</div>
 	</div>
-
-
 	<script>
 		$(document).ready(function () {
 $('[data-toggle="tooltip"]').tooltip();
@@ -337,12 +338,7 @@ $(this).hide();
 });
 	</script>
 	<select class="form-control" id="sortColumn">
-		<option value="0">Nom</option>
-		<!-- Index de la colonne Nom -->
-		<option value="1">Nombre</option>
-		<!-- Index de la colonne Nombre -->
-	</select>
-
+		<option value="0">Nom</option><!-- Index de la colonne Nom --><option value="1">Nombre</option><!-- Index de la colonne Nombre --></select>
 	<script>
 		function sortTable() {
 var columnIndex = parseInt(document.getElementById("sortColumn").value); // Obtenir l'index de la colonne sélectionnée
@@ -402,6 +398,4 @@ switching = true;
 }
 }
 	</script>
-
-
 {% endblock %}

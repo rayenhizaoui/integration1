@@ -68,7 +68,7 @@ class EquipementController extends AbstractController
 
             // Generate QR Code
             $qrCode = new QrCode($equipement->getId() . '-' . $newFilename);
-            $qrCode->setSize(95);
+            $qrCode->setSize(300);
 
             // Convert QR Code to Base64
             $qrOutputInterface = new PngWriter();
